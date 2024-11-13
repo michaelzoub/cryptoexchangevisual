@@ -78,6 +78,8 @@ export default function GlobeEarth(props) {
 
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.target.set(0, 0, 0)
+        controls.enableZoom = false
+        controls.pan = false
 
         //controls.minPolarAngle = Math.PI / 2;
         //controls.maxPolarAngle = Math.PI / 2;
@@ -126,7 +128,6 @@ export default function GlobeEarth(props) {
         //hex bins
         .hexBinPointsData(test)
         .hexBinResolution(3)
-        //.hexBinPointWeight(props.array.map((e) => e.TOTALVOLUME24H.BTC))
         .hexBinPointWeight(d => d.altitude)
 
         const globeGeometry = new THREE.SphereGeometry(radius, 80, 32)
@@ -172,9 +173,10 @@ export default function GlobeEarth(props) {
             scene.add(star)
         }
 
+
         // Animation
         function animate() {
-            //controls.update()
+            controls.update()
             if (sphereRef.current) {
                 /*angle += 1
                 const radius = 1 
